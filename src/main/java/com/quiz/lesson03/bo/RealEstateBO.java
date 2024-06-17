@@ -13,7 +13,7 @@ public class RealEstateBO {
 	
 	@Autowired
 	private RealEstateMapper realEstateMapper;
-	
+		
 	public RealEstate getRealEstateById(int id) {
 		return realEstateMapper.selectRealEstateById(id);
 	}
@@ -22,4 +22,20 @@ public class RealEstateBO {
 	public List<RealEstate> getRealEstateByRentPrice(Integer rentPrice) {
 		return realEstateMapper.selectRealEstateByRentPrice(rentPrice);
 	}
+	
+	// input: area, price
+	// output: List<RealEstate>
+	public List<RealEstate> getRealEstateListByAreaPrice(int area, int price) {
+		return realEstateMapper.selectRealEstateListByAreaPrice(area, price);
+	}
+	
+	public int addRealEstate(RealEstate realEstate) {
+		return realEstateMapper.insertRealEstate(realEstate);
+	}
+	
+	public int addRealEstateAsField(int realtorId, String address, int area, String type, int price, Integer rentPrice) {
+		return realEstateMapper.insertRealEstateAsField(realtorId, address, area, type, price, rentPrice);
+	}
+	
+	
 }
