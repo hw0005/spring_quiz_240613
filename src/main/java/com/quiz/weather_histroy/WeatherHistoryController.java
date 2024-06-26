@@ -1,5 +1,6 @@
 package com.quiz.weather_histroy;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,44 +15,40 @@ import com.quiz.weather_histroy.bo.WeatherHistoryBO;
 import com.quiz.weather_histroy.domain.WeatherHistory;
 
 @Controller
-@RequestMapping("/weather")
+@RequestMapping("/weather-history")
 public class WeatherHistoryController {
 	
 	@Autowired
 	private WeatherHistoryBO weatherHistoryBO;
 	
-	// 날씨 추가 기능 weather-history/add-weather
-	@PostMapping("/add-weather")
-	public String addWeather(
-			@RequestParam("date") String date,
-			@RequestParam("weather") String weather,
-			@RequestParam("temperatures") double temperatures,
-			@RequestParam("precipitation") double precipitation,
-			@RequestParam("microDust") String microDust,
-			@RequestParam("windSpeed") double windSpeed) {
-		
-		
-		return "";
-	}
-	
 	// 날씨 추가 화면
-	// http://localhost:8080/weather/add-weather-view
+	// http://localhost:8080/weather-history/add-weather-view
 	@GetMapping("/add-weather-view")
-	public String addWeatherView(
-			@RequestParam("date") String date,
-			@RequestParam("weather") String weather,
-			@RequestParam("temperatures") double temperatures,
-			@RequestParam("precipitation") double precipitation,
-			@RequestParam("microDust") String microDust,
-			@RequestParam("windSpeed") double windSpeed) {
-		
-		weatherHistoryBO.addWeather(date, weather, temperatures, precipitation, microDust, windSpeed);
+	public String addWeatherView() {
 		
 		return "weather_history/addWeather";
 	}
 	
+	// 날씨 추가 기능 /weather-history/add-weather
+	@PostMapping("/add-weather")
+	public String addWeather(
+			@RequestParam("date") String date, // LocalDate여도 됨
+			@RequestParam("weather") String weather,
+			@RequestParam("temperatures") double temperatures,
+			@RequestParam("precipitation") double precipitation,
+			@RequestParam("microDust") String microDust,
+			@RequestParam("windSpeed") double windSpeed
+			) {
+		
+		// db insert
+		weatherHistoryBO.addWeatherHistory(date, weather, temperatures, precipitation, microDust, windSpeed);
+		// redirect => 날씨 목록
+		return "redirect:/weather-history/weather-list-view";
+	}
+	
+	
 	// 날씨
-	// http://localhost:8080/weather/weather-list-view
+	// http://localhost:8080/weather-history/weather-list-view
 	@GetMapping("/weather-list-view")
 	public String weatherListView(Model model) {
 		
