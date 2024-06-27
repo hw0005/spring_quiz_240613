@@ -15,14 +15,6 @@ public class WeatherHistoryBO {
 	@Autowired
 	private WeatherHistoryMapper weatherHistoryMapper;
 	
-//	@RequestParam("date") String date, // LocalDate여도 됨
-//	@RequestParam("weather") String weather,
-//	@RequestParam("temperatures") double temperatures,
-//	@RequestParam("precipitation") double precipitation,
-//	@RequestParam("microDust") String microDust,
-//	@RequestParam("windSpeed") double windSpeed
-	
-	
 	public void addWeatherHistory(String date, String weather, double temperatures, double precipitation,
 			String microDust, double windSpeed) {
 		
