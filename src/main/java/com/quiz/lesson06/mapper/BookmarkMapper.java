@@ -1,6 +1,6 @@
 package com.quiz.lesson06.mapper;
-
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,4 +16,10 @@ public interface BookmarkMapper {
 			@Param("name") String name,
 			@Param("url") String url);
 	
+	// input: url
+	// output: List<Bookmark>
+	public List<Bookmark> selectBookmarkListByUrl(String url);
+	
+	
+	public int deleteBookmarkById(String id);
 }
