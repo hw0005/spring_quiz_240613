@@ -1,5 +1,6 @@
 package com.quiz.booking.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -10,11 +11,21 @@ import com.quiz.booking.domain.Booking;
 @Mapper
 public interface BookingMapper {
 	
-	public List<Booking> selectBookingList(
+	public List<Booking> selectBookingList();
+	
+	public int deleteBookingById(String id);
+	
+	
+	public void insertBooking(
 			@Param("name") String name,
-			@Param("date") String date,
+			@Param("date") LocalDate date,
 			@Param("day") int day,
 			@Param("headcount") int headcount,
-			@Param("phoneNumber") String phoneNumber,
-			@Param("state") String state);
+			@Param("phoneNumber") String phoneNumber);
+	
+	public List<Booking> selectBookingList(
+			@Param("name") String name,
+			@Param("phoneNumber") String phoneNumber);
+	
+	
 }

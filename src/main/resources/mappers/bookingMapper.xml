@@ -15,14 +15,58 @@
 			, `createdAt`
 			, `updatedAt`		
  		FROM
+ 			`booking`		
+ 	</select>
+ 	
+ 	<delete id="deleteBookingById" parameterType="string">
+ 		DELETE FROM
  			`booking`
  		WHERE
-			`name` = #{name}	
-			, `headcount` = #{headcount}
-			, `day` = #{day}	
-			, `date` = #{date}		
-			, `phoneNumber` = #{phoneNumber}	
-			, `state` = #{state}		
- 	</select>
+ 			`id` = #{id}
+ 	</delete>
+ 	
+	<insert id="insertBooking" parameterType="map">
+		INSERT INTO
+			`booking`
+		(
+			`name`		
+			, `day`	
+			, `date`		
+			, `headcount`		
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`	
+		)
+		VALUES
+		(
+			#{name}
+			, #{day}
+			, #{date}
+			, #{headcount}
+			, #{phoneNumber}
+			, '대기중'
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	
+	<select id="selectBookingList" parameterType="map" resultType="com.quiz.booking.domain.Booking">
+		SELECT
+ 			`id`	
+			, `name`		
+			, `headcount`		
+			, `day`	
+			, `date`		
+			, `phoneNumber`		
+			, `state`		
+			, `createdAt`
+			, `updatedAt`		
+ 		FROM
+ 			`booking`
+ 		WHERE
+ 			`name` = #{name}
+ 			, `phoneNumber = #{phoneNumber}
+	</select>
  
  </mapper>
