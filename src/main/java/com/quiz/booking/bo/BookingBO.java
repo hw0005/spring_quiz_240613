@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.quiz.booking.domain.Booking;
 import com.quiz.booking.mapper.BookingMapper;
+import com.quiz.lesson07.entity.CompanyEntity;
+import com.quiz.lesson07.respository.CompanyRepository;
 
 @Service
 public class BookingBO {
@@ -30,10 +32,18 @@ public class BookingBO {
 	}
 	
 	// 조회
-	public boolean getBooking(String name, String phoneNumber) {
-		List<Booking> bookingList = bookingMapper.selectBookingList(name, phoneNumber);
+	// input: name, phoneNumber
+	// output: Booking(최신) or null
+	
+	public Booking getLatestBookingByNamePhoneNumber(String name, String phoneNumber) {
+		// 리스트가 없을 때: []    있을 때: [booking1, booking2...]
+		List<Booking> bookingList = bookingMapper.selectBookingListByNamePhoneNumber(name, phoneNumber);
+//		if (bookingList.isEmpty()) {
+//			return null;
+//		}
 		
-		return bookingList.isEmpty() ? false : true;
+		return bookingList.isEmpty() ? null : bookingList.get(bookingList.size() - 1);
+		
 	}
 	
 }

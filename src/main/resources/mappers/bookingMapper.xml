@@ -51,7 +51,8 @@
 		)
 	</insert>
 	
-	<select id="selectBookingList" parameterType="map" resultType="com.quiz.booking.domain.Booking">
+	<select id="selectBookingListByNamePhoneNumber" parameterType="map" 
+	resultType="com.quiz.booking.domain.Booking">
 		SELECT
  			`id`	
 			, `name`		
@@ -61,12 +62,12 @@
 			, `phoneNumber`		
 			, `state`		
 			, `createdAt`
-			, `updatedAt`		
+			, `updatedAt`
  		FROM
  			`booking`
  		WHERE
  			`name` = #{name}
- 			, `phoneNumber = #{phoneNumber}
+ 			AND `phoneNumber` = #{phoneNumber}
 	</select>
  
  </mapper>

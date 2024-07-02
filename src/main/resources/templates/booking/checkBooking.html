@@ -88,9 +88,13 @@
 					// response					
 					, success:function(data) {
 						if (data.code == 200) {
-							alert("이름: " + data.name + "\n" + "날짜: " + data.date + "\n" +"일수: " + data.day + "\n" + "인원: " + data.headcount +"\n" +"전화번호: " + data.phoneNumber);
-						} else {
-							alert("예약내역이 없습니다.");
+							// 성공
+							// {"code": 200, "result":booking 객체}
+							alert("이름: " + data.result.name + "\n" + "날짜: " + data.result.date + "\n" +"일수: " + data.result.day + "\n" + "인원: " + data.result.headcount +"\n" +"전화번호: " +data.result.phoneNumber);
+						} else if (data.code == 500){
+							// 예약 내역 없음
+							// {"code":500, "error_message":"예약 내역이 없습니다."}
+							alert(data.error_message);
 						}
 						
 					}
